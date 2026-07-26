@@ -22,9 +22,10 @@ and uses traditional BibTeX—not `biblatex` or Biber—for citations.
    full TeX Live or MacTeX installation includes them).
 2. Clone or download this repository and open a terminal in its top-level
    directory (the directory containing `Makefile`).
-3. Edit the metadata and sample prose in `proposal.tex`.
-4. Replace `includes/logo.png` and edit bibliography records in
-   `includes/refs.bib`.
+3. Edit the metadata and compliance-oriented proposal outline in `proposal.tex`.
+4. Replace `includes/logo.png`. If the proposal cites external sources, edit
+   bibliography records in `includes/refs.bib` and enable the bibliography as
+   directed near the end of `proposal.tex`.
 5. Run `make`. The finished document is `proposal.pdf`.
 6. Run `make validate` before sharing the PDF.
 
@@ -56,7 +57,7 @@ processor for both engines.
 | Command | Purpose |
 | --- | --- |
 | `make` or `make proposal` | Build `proposal.pdf` with `latexmk` (recommended). |
-| `make manual` | Run the explicit LaTeX/BibTeX four-pass sequence. |
+| `make manual` | Run the explicit LaTeX pass sequence and BibTeX when enabled. |
 | `make debug` | Alias for `make manual`. |
 | `make validate` | Build and check the main PDF, citations, cross-references, and cover fixture. |
 | `make cover-fields-fixture` | Build the optional-cover-field regression fixture. |
@@ -65,11 +66,12 @@ processor for both engines.
 
 `latexmk` is the primary build orchestrator because it notices which generated
 files changed and repeats tools until the document settles. The manual target
-is intentionally kept for learning and diagnosis. It performs exactly:
+is intentionally kept for learning and diagnosis. It performs the following
+sequence, skipping BibTeX when the document has no enabled bibliography:
 
 ```sh
 pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
-bibtex proposal
+grep -q '\\bibdata' proposal.aux && bibtex proposal
 pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
 pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
 ```
@@ -168,6 +170,24 @@ Choose the pages appropriate to the deliverable near
 Remove or comment out a command for a page you do not need. Customize acronyms
 in `includes/acronyms.tex`.
 
+### Tailor the proposal outline
+
+The body of `proposal.tex` is a compliance-oriented outline covering the
+executive summary, understanding of the requirement, technical and management
+approaches, communication, staffing, quality, risk, security, past performance,
+assumptions, and conclusion. Bracketed paragraphs are drafting prompts. Replace
+them with solicitation-specific content; do not submit them as representations
+about your organization or solution.
+
+Before drafting, build a compliance matrix from the solicitation's proposal
+instructions, statement of work, evaluation factors, attachments, and
+amendments. Reorder and rename the template sections so the proposal mirrors
+the required organization and evaluator terminology. Then verify that every
+requirement has an unambiguous response owner and proposal location, and that
+technical commitments agree with the staffing, schedule, contracts, and
+pricing volumes. Delete sections that are prohibited or genuinely inapplicable
+rather than spending page count on generic material.
+
 ### Document-control marking profiles
 
 The template provides five independent profiles, all disabled by default:
@@ -230,11 +250,12 @@ The citation architecture is deliberately traditional:
 6. The final `pdflatex` pass resolves the remaining citation numbers,
    cross-references, table of contents, and hyperlink back-references.
 
-The `\bib` command near the end of `proposal.tex` is what selects the `unsrt`
-style and the `includes/refs` database. Keep it before `\end{document}`. Do not
-run `bibtex proposal.tex`; BibTeX takes the job name, so the correct command is
-`bibtex proposal`. In everyday work, simply run `make` and let `latexmk` decide
-which passes are necessary.
+The commented `\bib` command near the end of `proposal.tex` selects the `unsrt`
+style and the `includes/refs` database. After adding at least one citation,
+uncomment it and keep it before `\end{document}`. Do not run `bibtex
+proposal.tex`; BibTeX takes the job name, so the correct command is `bibtex
+proposal`. In everyday work, simply run `make` and let `latexmk` decide which
+passes are necessary.
 
 ## Validation
 

@@ -19,10 +19,11 @@ all: proposal
 proposal:
 	$(LATEXMK) -pdf -bibtex $(LATEX_FLAGS) $(MAIN).tex
 
-# Transparent four-pass equivalent for debugging: LaTeX, BibTeX, LaTeX, LaTeX.
+# Transparent pass sequence for debugging. BibTeX runs only when the document
+# has enabled a bibliography and the first LaTeX pass writes \bibdata.
 manual debug:
 	$(PDFLATEX) $(LATEX_FLAGS) $(MAIN).tex
-	$(BIBTEX) $(MAIN)
+	@if grep -q '\\bibdata' $(MAIN).aux; then $(BIBTEX) $(MAIN); fi
 	$(PDFLATEX) $(LATEX_FLAGS) $(MAIN).tex
 	$(PDFLATEX) $(LATEX_FLAGS) $(MAIN).tex
 
