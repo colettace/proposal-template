@@ -1,13 +1,17 @@
-\def \projectname{YOURMOM\xspace}
+\input{includes/template.tex}
 
-\def \company{Your Company Name}
+% Proposal metadata is namespaced to avoid replacing LaTeX commands.  Because
+% the template declares these with \newcommand, misspellings and duplicate
+% declarations are reported instead of silently changing unrelated commands.
+\renewcommand{\ProposalProjectName}{YOURMOM}
+\renewcommand{\ProposalCompany}{Your Company Name}
 \def \companyref{N/A}
 \def \companytype{OTHER SMALL BUSINESS}
 \def \team{N/A}
 \def \restrictions{Proprietary Information}
-\def \title{\projectname}
+\renewcommand{\ProposalTitle}{\ProposalProjectName}
 \def \biline{Short phrase describing the project}
-\def \author{Your Name}
+\renewcommand{\ProposalAuthor}{Your Name}
 \def \email{your-email@example.com}
 \def \phone{800-555-1212}
 \def \address{10 Main Street, Springfield, TX, 99999}
@@ -49,8 +53,6 @@
 \def \awardtype{Cost Plus Fixed Fee (CPFF)}
 \def \pop{January 1, 2000 - December 31, 2020 (3 days)}
 \def \submitdate{January 1, 2020}
-
-\input{includes/template.tex}
 
 \begin{document}
 

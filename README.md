@@ -21,14 +21,20 @@ If you plan on building a whitepaper, use the following:
 
 The following fields should be filed out if you intend on using proposalcover or whitepapercover:
 
-* \projectname:  NOTE, whatever you name your project, add \xspace to the end of the definition, as to make use in future macros work out correctly
-* \company: Your Company Name
+The template declares its metadata commands with `\newcommand`; configure them
+with `\renewcommand` after loading `includes/template.tex`. This makes duplicate
+or misspelled command declarations fail loudly rather than silently replacing a
+LaTeX command. Project names are ordinary values and do not need `\xspace`.
+
+* `\ProposalProjectName`: Your project's name
+* `\ProposalTitle`: The proposal title (this may expand to `\ProposalProjectName`)
+* `\ProposalCompany`: Your Company Name
 * \companyref: Your Company reference (big companies need this)
 * \companytype: OTHER SMALL BUSINESS
 * \team: Companies you are teaming with (N/A if you are on your own)
 * \restrictions: Proprietary Information
 * \biline: Short phrase describing the project
-* \author: Your Name
+* `\ProposalAuthor`: Your Name
 * \email: your-email@example.com
 * \phone: your phone number
 * \address: your company address
