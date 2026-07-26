@@ -1,0 +1,52 @@
+% Compile from the repository root with:
+%   pdflatex -interaction=nonstopmode -halt-on-error tests/cover-fields-fixture.tex
+% This fixture renders one cover with every optional field and a second cover
+% with every optional field omitted. Keep this list aligned with the guarded
+% fields in \proposalcover and their sample definitions in proposal.tex.
+\input{includes/template.tex}
+
+% Fields required by \proposalcover.
+\def\baa{Fixture BAA}
+\def\techarea{Fixture technical area}
+\def\company{Fixture Company}
+\def\title{Fixture Proposal}
+\def\biline{Cover-field regression fixture}
+\def\author{Fixture Author}
+\def\email{fixture@example.com}
+\def\phone{555-0100}
+\def\address{1 Fixture Way}
+\newif\ifproposalrestricted
+\proposalrestrictedfalse
+
+% Optional fields, populated for the first cover.
+\def\companytype{Fixture business type}
+\def\companyref{REF-1234}
+\def\team{Fixture Team}
+\def\cost{\$123.45}
+\def\submitdate{July 26, 2026}
+\def\awardtype{Fixture award type}
+\def\placeofperformance{Fixture Place}
+\def\pop{One fixture year}
+\def\duns{123456789}
+\def\tin{12-3456789}
+\def\cagecode{ABCDE}
+
+\begin{document}
+\proposalcover
+
+% Undefine every guarded cover field for the second cover. Using \let in this
+% way makes \ifdefined false without relying on additional LaTeX packages.
+\let\companytype\undefined
+\let\companyref\undefined
+\let\team\undefined
+\let\cost\undefined
+\let\submitdate\undefined
+\let\awardtype\undefined
+\let\placeofperformance\undefined
+\let\pop\undefined
+\let\duns\undefined
+\let\tin\undefined
+\let\cagecode\undefined
+
+\proposalcover
+\end{document}

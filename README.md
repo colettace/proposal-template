@@ -45,6 +45,13 @@ The following fields should be filed out if you intend on using proposalcover:
 * \awardtype: Cost Plus Fixed Fee (CPFF)
 * \pop: January 1, 2000 - December 31, 2020 (3 days)
 * \submitdate: January 1, 2020
+* \placeofperformance: the location where the proposed work will be performed
+
+Each of the cover-specific fields above from `\cost` through
+`\placeofperformance`, as well as `\companyref`, `\companytype`, and `\team`,
+is optional: omit its definition to omit its row from the cover table. The
+compile-time fixture renders all optional rows once and then renders a cover
+with all of them omitted; run it with `make cover-fields-fixture`.
 
 Document Controls
 -----------------
