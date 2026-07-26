@@ -17,6 +17,9 @@ and uses traditional BibTeX—not `biblatex` or Biber—for citations.
 1. Install a TeX distribution. On macOS, install
    [MacTeX](https://www.tug.org/mactex/); on Linux, install your distribution's
    TeX Live packages. Make sure `latexmk`, `pdflatex`, and `bibtex` are present.
+   The template also requires the Latin Modern fonts and the `fontenc`,
+   `microtype`, `enumitem`, `xcolor`, `hyperref`, and `bookmark` packages (a
+   full TeX Live or MacTeX installation includes them).
 2. Clone or download this repository and open a terminal in its top-level
    directory (the directory containing `Makefile`).
 3. Edit the metadata and sample prose in `proposal.tex`.
@@ -28,6 +31,25 @@ and uses traditional BibTeX—not `biblatex` or Biber—for citations.
 Do not compile `includes/template.tex` directly. It supplies the document
 class, packages, page designs, and helper commands; `proposal.tex` is the main
 document.
+
+### Supported TeX engines
+
+**pdfLaTeX is the default and recommended engine** used by every Make target.
+It uses T1 font encoding and the maintained Latin Modern Type 1 fonts. The
+template also supports **LuaLaTeX** through `fontspec`, using the Latin Modern
+Roman, Sans, and Mono OpenType fonts shipped with TeX Live's Latin Modern
+package. Other engines intentionally produce an error rather than silently
+selecting a different font setup.
+
+To make a one-off LuaLaTeX build, run:
+
+```sh
+latexmk -lualatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
+```
+
+Whichever engine you choose, use it consistently for a build; clean generated
+files before switching engines. Traditional BibTeX remains the bibliography
+processor for both engines.
 
 ## Build commands
 
@@ -98,7 +120,11 @@ with `\Proposal` are declared by the template and must be configured with
 \renewcommand{\ProposalTitle}{A Descriptive Proposal Title}
 \renewcommand{\ProposalCompany}{Company Name}
 \renewcommand{\ProposalAuthor}{Author Name}
+\renewcommand{\ProposalSubject}{Technical proposal for Project Name}
 ```
+
+These values populate both the document and its PDF title, author, and subject
+metadata. Set them before `\begin{document}`.
 
 Other fields use the existing `\def` style. Required proposal-cover fields
 include `\baa`, `\techarea`, `\biline`, `\email`, `\phone`, and `\address`.
@@ -179,7 +205,8 @@ validate` target manages the order for you.
 
 Install a complete TeX distribution and open a new terminal. On macOS, verify
 that `/Library/TeX/texbin` is on `PATH`. Minimal Linux installations may need
-extra packages for `acronym`, `csquotes`, `mdwlist`, or `titlesec`.
+extra packages for `acronym`, `bookmark`, `csquotes`, `enumitem`, `lmodern`,
+`microtype`, or `titlesec`.
 
 ### The PDF shows `[?]`, `??`, or no bibliography
 
