@@ -1,328 +1,131 @@
 # Proposal template
 
-This repository is a starting point for a LaTeX proposal or white paper. It
-includes a configurable government-proposal cover sheet, ordinary and
-restricted page styles, a document-information page, an acronym list, and a
-traditional BibTeX bibliography.
+A practical starting point for a government proposal or white paper. The
+template provides configurable cover sheets, solicitation presets, optional
+cover rows, document-control markings, page styles, document-information and
+acronym pages, a compliance-oriented response outline, and BibTeX citations.
 
-> **Logo notice:** `includes/logo.png` belongs to the OpenBSD project. Replace
-> it with your organization's logo before distributing your document.
+> **Before distributing a proposal:** replace `includes/logo.png`; the sample
+> image belongs to the OpenBSD project. Replace every sample value and every
+> bracketed drafting prompt, and validate all markings against the solicitation.
 
-## Start here
+## Quick start
 
-LaTeX turns plain-text `.tex` source files into a PDF. This project uses
-[`latexmk`](https://ctan.org/pkg/latexmk) to run LaTeX as many times as needed
-and uses traditional BibTeX—not `biblatex` or Biber—for citations.
+1. Edit `includes/organization.tex` once with the organization details that
+   should carry into future proposals.
+2. Copy the repository for a new opportunity, then edit the metadata and body
+   in `proposal.tex`.
+3. Keep only the cover and information pages the deliverable requires, and
+   replace `includes/logo.png` and `includes/acronyms.tex` as needed.
+4. Run `make`, review `proposal.pdf`, and run `make validate` before delivery.
 
-1. Install a TeX distribution. On macOS, install
-   [MacTeX](https://www.tug.org/mactex/); on Linux, install your distribution's
-   TeX Live packages. Make sure `latexmk`, `pdflatex`, and `bibtex` are present.
-   The template also requires the Latin Modern fonts and the `fontenc`,
-   `microtype`, `enumitem`, `xcolor`, `hyperref`, and `bookmark` packages (a
-   full TeX Live or MacTeX installation includes them).
-2. Clone or download this repository and open a terminal in its top-level
-   directory (the directory containing `Makefile`).
-3. Edit the metadata and compliance-oriented proposal outline in `proposal.tex`.
-4. Replace `includes/logo.png`. If the proposal cites external sources, edit
-   bibliography records in `includes/refs.bib` and enable the bibliography as
-   directed near the end of `proposal.tex`.
-5. Run `make`. The finished document is `proposal.pdf`.
-6. Run `make validate` before sharing the PDF.
+For TeX installation, supported engines, Make targets, TeXShop, citations,
+validation, and troubleshooting, see [Building the document](BUILDING.md).
+Compile `proposal.tex`, not `includes/template.tex`.
 
-Do not compile `includes/template.tex` directly. It supplies the document
-class, packages, page designs, and helper commands; `proposal.tex` is the main
-document.
+## Where to customize
 
-### Supported TeX engines
+The files have deliberately separate responsibilities:
 
-**pdfLaTeX is the default and recommended engine** used by every Make target.
-It uses T1 font encoding and the maintained Latin Modern Type 1 fonts. The
-template also supports **LuaLaTeX** through `fontspec`, using the Latin Modern
-Roman, Sans, and Mono OpenType fonts shipped with TeX Live's Latin Modern
-package. Other engines intentionally produce an error rather than silently
-selecting a different font setup.
-
-To make a one-off LuaLaTeX build, run:
-
-```sh
-latexmk -lualatex -bibtex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
-```
-
-Whichever engine you choose, use it consistently for a build; clean generated
-files before switching engines. Traditional BibTeX remains the bibliography
-processor for both engines.
-
-## Build commands
-
-| Command | Purpose |
-| --- | --- |
-| `make` or `make proposal` | Build `proposal.pdf` with `latexmk` (recommended). |
-| `make manual` | Run the explicit LaTeX pass sequence and BibTeX when enabled. |
-| `make debug` | Alias for `make manual`. |
-| `make validate` | Build and check the main PDF, citations, cross-references, and cover fixture. |
-| `make cover-fields-fixture` | Build the optional-cover-field regression fixture. |
-| `make cleanup` | Delete intermediate files but keep generated PDFs. |
-| `make clean` | Delete intermediate files and generated PDFs. |
-
-`latexmk` is the primary build orchestrator because it notices which generated
-files changed and repeats tools until the document settles. The manual target
-is intentionally kept for learning and diagnosis. It performs the following
-sequence, skipping BibTeX when the document has no enabled bibliography:
-
-```sh
-pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
-grep -q '\\bibdata' proposal.aux && bibtex proposal
-pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
-pdflatex -interaction=nonstopmode -halt-on-error -file-line-error proposal.tex
-```
-
-Run those commands from the repository root. If one fails, read the last error
-in `proposal.log`, fix the source, and rerun the complete sequence. `make
-cleanup` is useful when generated state appears stale; use `make clean` only
-when you also want to remove the PDFs.
-
-## macOS, MacTeX, and TeXShop
-
-### Command line with MacTeX
-
-MacTeX installs the required programs under `/Library/TeX/texbin`. A new
-Terminal window normally finds them automatically. Check with:
-
-```sh
-latexmk -v
-pdflatex --version
-bibtex --version
-```
-
-Then change to this repository and run `make`. If the commands are not found,
-add `/Library/TeX/texbin` to your shell's `PATH` or reopen Terminal after the
-MacTeX installation.
-
-### TeXShop
-
-Open `proposal.tex`, not `includes/template.tex`. For the simplest workflow,
-choose **LaTeXmk** in TeXShop's Typeset engine menu and click **Typeset**. If
-LaTeXmk is not listed, use TeXShop's engine preferences or run `make` in
-Terminal.
-
-To reproduce the manual workflow inside TeXShop, typeset once with **LaTeX**,
-switch the engine to **BibTeX** and typeset, then switch back to **LaTeX** and
-typeset twice. The engine names may appear as `pdfLaTeX` and `BibTeX` depending
-on the TeXShop version. Terminal remains the authoritative way to run the
-repository's validation targets.
-
-## Configure the document
-
-The first part of `proposal.tex` contains sample metadata. Commands beginning
-with `\Proposal` are declared by the template and must be configured with
-`\renewcommand`:
-
-```tex
-\renewcommand{\ProposalProjectName}{Project Name}
-\renewcommand{\ProposalTitle}{A Descriptive Proposal Title}
-\renewcommand{\ProposalCompany}{Company Name}
-\renewcommand{\ProposalAuthor}{Author Name}
-\renewcommand{\ProposalSubject}{Technical proposal for Project Name}
-```
-
-These values populate both the document and its PDF title, author, and subject
-metadata. Set them before `\begin{document}`.
-
-Choose a solicitation preset before setting solicitation-specific values:
-
-```tex
-\ProposalPresetRFP % or \ProposalPresetRFQTaskOrder, \ProposalPresetBAA,
-                   % or \ProposalPresetWhitePaper
-\renewcommand{\ProposalSolicitationNumber}{RFP-2026-001}
-```
-
-Presets supply appropriate procurement-type values and common labels. They do
-not lock the cover: every value and every `\ProposalLabel...` command may be
-overridden with `\renewcommand` after applying the preset.
-
-The configurable cover metadata includes solicitation number, amendment
-acknowledgment, opportunity title, agency, office, procurement type, proposal
-volume and number, submission date/time zone, NAICS, size status, contract
-vehicle/task order, set-aside, CAGE, UEI, and validity period. Empty values
-suppress their rows. `\ProposalBAATechnicalArea` and
-`\ProposalBAATopicNumber` are optional even under the BAA preset rather than
-being assumed for every submission. Configure distinct contacts with the
-`\ProposalTechnicalPOC...`, `\ProposalContractsPOC...`, and
-`\ProposalSecurityPOC...` command families; each supports a name, email,
-phone, and address.
-
-Additional legacy fields use the existing `\def` style. The following cover
-rows are optional and disappear when their command is not defined:
-
-- `\companytype`, `\companyref`, and `\team`
-- `\cost` and `\awardtype`
-- `\placeofperformance` and `\pop`
-- `\tin`
-
-Choose the pages appropriate to the deliverable near
-`\begin{document}`:
-
-- `\proposalcover` creates the government-proposal cover.
-- `\whitepapercover` creates a general title page.
-- `\docinfo` creates copyright, contact, contents, figure, table, and acronym
-  pages.
-
-Remove or comment out a command for a page you do not need. Customize acronyms
-in `includes/acronyms.tex`.
-
-### Tailor the proposal outline
-
-The body of `proposal.tex` is a compliance-oriented outline covering the
-executive summary, understanding of the requirement, technical and management
-approaches, communication, staffing, quality, risk, security, past performance,
-assumptions, and conclusion. Bracketed paragraphs are drafting prompts. Replace
-them with solicitation-specific content; do not submit them as representations
-about your organization or solution.
-
-Before drafting, build a compliance matrix from the solicitation's proposal
-instructions, statement of work, evaluation factors, attachments, and
-amendments. Reorder and rename the template sections so the proposal mirrors
-the required organization and evaluator terminology. Then verify that every
-requirement has an unambiguous response owner and proposal location, and that
-technical commitments agree with the staffing, schedule, contracts, and
-pricing volumes. Delete sections that are prohibited or genuinely inapplicable
-rather than spending page count on generic material.
-
-### Document-control marking profiles
-
-The template provides five independent profiles, all disabled by default:
-
-| Profile | Enable switch | Configuration prefix |
+| Scope | File | Purpose |
 | --- | --- | --- |
-| Offeror proprietary data | `\ProposalOfferorProprietarytrue` | `\ProposalOfferorProprietary...` |
-| Solicitation-prescribed proposal legend | `\ProposalSolicitationLegendtrue` | `\ProposalSolicitationLegend...` |
-| Controlled Unclassified Information (CUI) | `\ProposalCUItrue` | `\ProposalCUI...` |
-| Export-controlled information | `\ProposalExportControlledtrue` | `\ProposalExportControlled...` |
-| Classified material | `\ProposalClassifiedtrue` | `\ProposalClassified...` |
+| Every proposal | `includes/organization.tex` | Organization defaults |
+| One opportunity | `proposal.tex` | Metadata and response |
+| Template behavior | `includes/template.tex` | Layout and commands |
+| Supporting content | `includes/` | Acronyms, sources, and logo |
 
-Each prefix has `Authority`, `Banner`, `PortionMarking`, `Dissemination`, and
-`Handling` commands. Every one must be set to a nonempty, reviewed value before
-its switch is enabled; compilation deliberately fails otherwise. If portion
-marking or dissemination restrictions do not apply, record that reviewed
-determination explicitly rather than leaving the field empty. Enabled banners
-appear in page headers and footers, and the document-information page records
-the complete profile details.
+For a normal proposal, do **not** edit `includes/template.tex`. Change it only
+when maintaining a fork whose layout or behavior should apply to every future
+proposal. This keeps reusable organization data out of the template internals
+and opportunity data together in `proposal.tex`.
 
-The repository supplies no authoritative legend, classification, CUI,
-export-control, or data-rights wording. Before enabling any profile, consult
-the actual solicitation and applicable contract clauses and confirm the text
-and treatment with the contracting officer. Consult the security officer for
-CUI or classified material and the export-control officer for controlled
-technical data. The responsible officials—not this template—must determine
-whether markings apply, which authority governs, the exact banner and portion
-marks, permitted dissemination, and handling requirements.
+### One-time organization setup
 
-For example, configuration follows this shape, using values obtained from
-those sources rather than copied universal text:
+Set every value in `includes/organization.tex`:
 
-```tex
-\renewcommand{\ProposalOfferorProprietaryAuthority}{<governing clause or solicitation section>}
-\renewcommand{\ProposalOfferorProprietaryBanner}{<exact approved banner text>}
-\renewcommand{\ProposalOfferorProprietaryPortionMarking}{<required behavior or reviewed not-applicable determination>}
-\renewcommand{\ProposalOfferorProprietaryDissemination}{<approved dissemination controls>}
-\renewcommand{\ProposalOfferorProprietaryHandling}{<approved handling notes>}
-\ProposalOfferorProprietarytrue
-```
+- `\OrganizationName`, `\OrganizationAddress`, `\OrganizationPhone`, and
+  `\OrganizationEmail`;
+- `\OrganizationCAGECode` and `\OrganizationUEI`; and
+- `\OrganizationDefaultPOC`, the person used as the starting technical,
+  contracts, and security contact.
 
-Do not treat profiles as interchangeable. In particular, changing a banner
-string cannot turn a proprietary proposal into a classified document;
-classified material requires its separately reviewed profile and authorized
-systems, facilities, personnel, and procedures.
+These are defaults, not assertions that the same values suit every
+solicitation. Override their use in `proposal.tex` when an opportunity requires
+a different contact, address, identifier, or submitting entity.
 
-## Citations and the BibTeX lifecycle
+### Proposal-by-proposal checklist
 
-The citation architecture is deliberately traditional:
+Work from the top of `proposal.tex` downward:
 
-1. Add an entry with a unique key to `includes/refs.bib`, for example
-   `@article{smith2026example, ...}`.
-2. Cite that key in `proposal.tex` with `\cite{smith2026example}`.
-3. The first `pdflatex` pass writes citation requests and bibliography metadata
-   to `proposal.aux`. Seeing question marks in this first-pass PDF is normal.
-4. `bibtex proposal` reads `proposal.aux`, finds the requested entries in
-   `includes/refs.bib`, applies the `unsrt` style, and writes `proposal.bbl`.
-5. The next `pdflatex` pass reads `proposal.bbl`, inserts the bibliography, and
-   writes updated labels and page references.
-6. The final `pdflatex` pass resolves the remaining citation numbers,
-   cross-references, table of contents, and hyperlink back-references.
+1. Set the project, title, author, short description, and PDF subject.
+2. Select one solicitation preset (`\ProposalPresetRFP`,
+   `\ProposalPresetRFQTaskOrder`, `\ProposalPresetBAA`, or
+   `\ProposalPresetWhitePaper`), then replace its cover values. A later
+   `\renewcommand` can override any preset value or `\ProposalLabel...` label.
+3. Review every cover field. Empty namespaced fields suppress their entire row.
+   Optional legacy rows (`\companytype`, `\companyref`, `\team`, `\cost`,
+   `\awardtype`, `\placeofperformance`, `\pop`, and `\tin`) appear only when
+   their `\def` line is present; comment out that line to remove the row.
+4. Keep only the required page commands: `\proposalcover`, `\whitepapercover`,
+   and `\docinfo`. Commenting out a command removes that page group.
+5. Reorder and rename the outline to mirror the solicitation, delete
+   inapplicable sections, and replace every bracketed prompt with evidence-based
+   proposal content.
+6. Add acronyms and sources only when used. To print references, add citations
+   and uncomment `\bib` near the end of `proposal.tex`.
 
-The commented `\bib` command near the end of `proposal.tex` selects the `unsrt`
-style and the `includes/refs` database. After adding at least one citation,
-uncomment it and keep it before `\end{document}`. Do not run `bibtex
-proposal.tex`; BibTeX takes the job name, so the correct command is `bibtex
-proposal`. In everyday work, simply run `make` and let `latexmk` decide which
-passes are necessary.
+#### Contacts: share, change, or remove
 
-## Validation
+The sample assigns `\OrganizationDefaultPOC` and the organization email, phone,
+and address to all three contact families:
+`\ProposalTechnicalPOC...`, `\ProposalContractsPOC...`, and
+`\ProposalSecurityPOC...`.
 
-`make validate` performs four checks:
+- **Same person for all roles:** leave those assignments as-is.
+- **Different people:** replace the values in the applicable family in
+  `proposal.tex`.
+- **Remove a contact row:** set its name to empty, for example
+  `\renewcommand{\ProposalSecurityPOC}{}`. The row is suppressed even if its
+  email, phone, or address assignments remain. Clearing individual detail
+  fields removes only those detail lines.
 
-- **Main document:** `proposal.pdf` exists and is nonempty after a successful
-  `latexmk` build.
-- **Citations:** `proposal.log` and `proposal.blg` contain no unresolved
-  citation or missing-database-entry warnings.
-- **References:** `proposal.log` contains no unresolved cross-reference or
-  unsettled-label warning.
-- **Cover fixture:** `tests/cover-fields-fixture.tex` compiles and produces a
-  nonempty PDF. The fixture renders all optional cover rows, then renders them
-  all omitted, guarding both layouts.
+### Document-control markings
 
-Because validation examines generated log files, do not delete intermediates
-between the build and individual validation targets. The combined `make
-validate` target manages the order for you.
+Five independent profiles are available and disabled by default: offeror
+proprietary data, a solicitation-prescribed legend, CUI, export-controlled
+information, and classified material. Each profile requires reviewed values for
+`Authority`, `Banner`, `PortionMarking`, `Dissemination`, and `Handling` before
+its `...true` switch is enabled; compilation fails if an enabled profile is
+incomplete.
 
-## Troubleshooting
+| Profile prefix | Enable switch |
+| --- | --- |
+| `\ProposalOfferorProprietary...` | `\ProposalOfferorProprietarytrue` |
+| `\ProposalSolicitationLegend...` | `\ProposalSolicitationLegendtrue` |
+| `\ProposalCUI...` | `\ProposalCUItrue` |
+| `\ProposalExportControlled...` | `\ProposalExportControlledtrue` |
+| `\ProposalClassified...` | `\ProposalClassifiedtrue` |
 
-### `latexmk`, `pdflatex`, or `bibtex` is not found
+Configure and enable a profile in `proposal.tex`, after the two `\input` lines
+and before `\begin{document}`. Enabled banners appear in headers and footers;
+the document-information pages record the full profile.
 
-Install a complete TeX distribution and open a new terminal. On macOS, verify
-that `/Library/TeX/texbin` is on `PATH`. Minimal Linux installations may need
-extra packages for `acronym`, `bookmark`, `csquotes`, `enumitem`, `lmodern`,
-`microtype`, or `titlesec`.
+The repository supplies no authoritative marking language. Obtain exact text
+from the solicitation and governing clauses, and confirm it with the
+contracting officer and, as applicable, security or export-control officials.
+Profiles are not interchangeable, and enabling one does not make an
+unauthorized system or workflow suitable for controlled information.
 
-### The PDF shows `[?]`, `??`, or no bibliography
-
-Confirm that every `\cite{key}` exactly matches an entry in
-`includes/refs.bib`, that `\bib` remains in the document, and that BibTeX is
-being run on `proposal` rather than on a file path or `.tex` filename. Run
-`make cleanup && make validate` to rebuild the generated dependency chain.
-Inspect `proposal.blg` for BibTeX diagnostics.
-
-### LaTeX says a control sequence is undefined
-
-Check spelling and ensure metadata appears after
-`\input{includes/template.tex}`. Use `\renewcommand` for the namespaced
-`\Proposal...` commands and retain the documented `\def` form for legacy
-fields. Compile from the repository root so relative `includes/...` paths work.
-
-### LaTeX stops with a package or file error
-
-The first error is usually the useful one. Search `proposal.log` for lines
-beginning with `!` or use `make manual` to see exactly which stage fails. A
-missing `.sty` file means the corresponding TeX package must be installed.
-
-### Changes do not appear or the build loops
-
-Run `make cleanup` and rebuild. This removes auxiliary state while preserving
-the last PDF. Persistent rerun or undefined-reference warnings indicate a real
-source problem; `make validate` intentionally fails until it is corrected.
-
-## Repository architecture
+## Repository map
 
 ```text
-proposal.tex                    Main document and proposal-specific metadata
-includes/template.tex           Document class, packages, covers, and helpers
-includes/refs.bib               Traditional BibTeX database
+proposal.tex                    Proposal-specific configuration and content
+includes/organization.tex       Reusable organization defaults
+includes/template.tex           Document implementation and reusable layouts
 includes/acronyms.tex           Acronym definitions
-includes/logo.png               Replaceable cover logo
+includes/refs.bib               BibTeX database
+includes/logo.png               Replaceable logo
 tests/cover-fields-fixture.tex  Optional-cover-row regression document
-Makefile                        Build, validation, and cleanup entry points
+Makefile                        Build, validation, and cleanup targets
+BUILDING.md                     General LaTeX and build guidance
 ```
-
-Keep reusable layout behavior in `includes/template.tex` and proposal content
-in `proposal.tex`. Keep bibliography data in `includes/refs.bib`; generated
-`.aux`, `.bbl`, `.blg`, `.log`, and PDF files should not be edited by hand.
