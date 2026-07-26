@@ -201,9 +201,9 @@
         \end{center}
     }
 
-    \ifdefined\proposalcontrol
+    \ifproposalrestricted
     \section*{Use and Disclosure of Data}
-    This proposal includes data that shall not be disclosed outside the Government and shall not be duplicated, used, or disclosed—in whole or in part - for any purpose other than to evaluate this response.  If, however, a contract is awarded to this offeror as a result of - or in connection with - the submission of this data, the Government shall have the right to duplicate, use, or disclose the data to the extent provided in the resulting contract.  This restriction does not limit the Government's right to use information contained in this data if it is obtained from another source without restriction.
+    \proposalrestrictedlegend
     \fi
     \cleardoublepage
 }
@@ -239,9 +239,9 @@
             
     \author \\ \email \\ \phone 
     
-    \ifdefined\exportcontrol
+    \ifexportcontrolled
     \section*{Export Control}
-    WARNING - This document contains Technical Data whose export is restricted by the Arms Export Control Act (Title 22, U.S.C., Sec 2751, et seq.).  Violations of these export laws are subject to severe criminal penalties.
+    \exportcontrollegend
     \fi
     
     \cleardoublepage

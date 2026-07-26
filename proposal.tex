@@ -18,8 +18,24 @@
 
 \def \placeofperformance{\address}
 %\def \classification{For Official Use Only}   % only define if this is classified
-\def \exportcontrol{} % uncomment if this document is export controlled
-\def \proposalcontrol{} % uncomment if this is a proposal with restricted release for .gov purposes
+
+% IMPORTANT: Do not invent or reuse markings without checking the governing
+% requirements.  Take all markings and legend text from the solicitation,
+% security classification guide, CUI marking guidance, or applicable
+% data-rights clause.
+%
+% Both controls are disabled by default.  Enable them with
+% \exportcontrolledtrue and/or \proposalrestrictedtrue, respectively.
+\newif\ifexportcontrolled
+\exportcontrolledfalse
+\newif\ifproposalrestricted
+\proposalrestrictedfalse
+
+% Set these to the exact legends required for this document before enabling
+% the corresponding control.  The text is intentionally not solicitation- or
+% jurisdiction-specific.
+\def\exportcontrollegend{Replace with the required export-control legend.}
+\def\proposalrestrictedlegend{Replace with the required proposal-restriction legend.}
 
 %% the following are only needed for proposals.  
 \def \baa{BAA-2013-001}

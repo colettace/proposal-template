@@ -49,10 +49,18 @@ The following fields should be filed out if you intend on using proposalcover:
 Document Controls
 -----------------
 
-If you have to restrict release of the document, uncomment the fields from proposal.tex
+If you have to restrict release of the document, configure the legend text in
+`proposal.tex`, then enable the applicable boolean with one or both of these
+commands:
 
-* \exportcontrol: this includes a blurb about the fact that it is ITAR restricted
-* \proposalcontrol: this includes a blurb about the proposal is restricted release for .gov proposal review purposes only
+* `\exportcontrolledtrue`: includes the text from `\exportcontrollegend` on the document information page
+* `\proposalrestrictedtrue`: includes the text from `\proposalrestrictedlegend` on the proposal cover
+
+Both booleans default to false.  Markings and legend text must be taken from the
+solicitation, security classification guide, CUI marking guidance, or applicable
+data-rights clause; the template deliberately does not assume that one warning
+is appropriate for every solicitation, contract clause, export jurisdiction, or
+CUI category.
 
 On pages that have restricted information, set the page style to "restricted", which will add appropriate messages to the header and footer.  Note, if the document is classified, change "Proprietary Information" in the restrictions definition to appropriate classification marker.  Example:
 
