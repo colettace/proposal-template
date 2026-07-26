@@ -8,7 +8,7 @@
 \def \companyref{N/A}
 \def \companytype{OTHER SMALL BUSINESS}
 \def \team{N/A}
-\def \restrictions{Proprietary Information}
+\def \restrictions{}
 \renewcommand{\ProposalTitle}{\ProposalProjectName}
 \renewcommand{\ProposalSubject}{Technical and management proposal for \ProposalProjectName}
 \def \biline{Short phrase describing the project}
@@ -22,25 +22,11 @@
 %% 
 
 \def \placeofperformance{\address}
-%\def \classification{For Official Use Only}   % only define if this is classified
-
-% IMPORTANT: Do not invent or reuse markings without checking the governing
-% requirements.  Take all markings and legend text from the solicitation,
-% security classification guide, CUI marking guidance, or applicable
-% data-rights clause.
-%
-% Both controls are disabled by default.  Enable them with
-% \exportcontrolledtrue and/or \proposalrestrictedtrue, respectively.
-\newif\ifexportcontrolled
-\exportcontrolledfalse
-\newif\ifproposalrestricted
-\proposalrestrictedfalse
-
-% Set these to the exact legends required for this document before enabling
-% the corresponding control.  The text is intentionally not solicitation- or
-% jurisdiction-specific.
-\def\exportcontrollegend{Replace with the required export-control legend.}
-\def\proposalrestrictedlegend{Replace with the required proposal-restriction legend.}
+% Marking profiles are defined in includes/template.tex and are all disabled.
+% Before enabling one, configure its Authority, Banner, PortionMarking,
+% Dissemination, and Handling commands from the governing source.  An enabled
+% profile with any empty field stops compilation.  See README.md for the five
+% profile names and the people and documents that must be consulted.
 
 %% Select a solicitation preset, then override any value or label needed by
 %% the actual solicitation. Other presets are \ProposalPresetRFQTaskOrder,
@@ -93,8 +79,9 @@
 \whitepapercover
 \docinfo
 
-% mark pages that have restricted (aka: proprietary information with the "restricted" page style.
-\pagestyle{restricted}
+% Keep the ordinary page style unless a reviewed marking profile requires
+% banners. Enabling a profile makes its configured banner appear on pages.
+\pagestyle{plain}
 
 \section{Hi mom}
 I reference something here \cite{newsome2005dynamic}.
