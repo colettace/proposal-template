@@ -1,10 +1,11 @@
 \input{includes/template.tex}
+\input{includes/organization.tex}
 
 % Proposal metadata is namespaced to avoid replacing LaTeX commands.  Because
 % the template declares these with \newcommand, misspellings and duplicate
 % declarations are reported instead of silently changing unrelated commands.
 \renewcommand{\ProposalProjectName}{Project Name}
-\renewcommand{\ProposalCompany}{Your Company Name}
+\renewcommand{\ProposalCompany}{\OrganizationName}
 \def \companyref{N/A}
 \def \companytype{OTHER SMALL BUSINESS}
 \def \team{N/A}
@@ -12,10 +13,10 @@
 \renewcommand{\ProposalTitle}{\ProposalProjectName}
 \renewcommand{\ProposalSubject}{Technical and management proposal for \ProposalProjectName}
 \def \biline{Short phrase describing the project}
-\renewcommand{\ProposalAuthor}{Your Name}
-\def \email{your-email@example.com}
-\def \phone{800-555-1212}
-\def \address{10 Main Street, Springfield, TX, 99999}
+\renewcommand{\ProposalAuthor}{\OrganizationDefaultPOC}
+\def \email{\OrganizationEmail}
+\def \phone{\OrganizationPhone}
+\def \address{\OrganizationAddress}
 
 %%
 % for each of the following items, uncommenting the fields will make them show up in the appropriate places
@@ -44,25 +45,25 @@
 \renewcommand{\ProposalSizeStatus}{Small Business}
 \renewcommand{\ProposalContractVehicleTaskOrder}{N/A}
 \renewcommand{\ProposalSetAsideType}{Total Small Business Set-Aside}
-\renewcommand{\ProposalCAGECode}{22222}
-\renewcommand{\ProposalUEI}{ABCDEF123456}
+\renewcommand{\ProposalCAGECode}{\OrganizationCAGECode}
+\renewcommand{\ProposalUEI}{\OrganizationUEI}
 \renewcommand{\ProposalValidityPeriod}{120 days after submission}
 
 % BAA-specific metadata is optional; leave empty for other solicitation types.
 % \renewcommand{\ProposalBAATechnicalArea}{Technical Area 1}
 % \renewcommand{\ProposalBAATopicNumber}{Topic 1.2}
 
-\renewcommand{\ProposalTechnicalPOC}{Technical Lead}
-\renewcommand{\ProposalTechnicalPOCEmail}{technical@example.com}
-\renewcommand{\ProposalTechnicalPOCPhone}{800-555-0101}
+\renewcommand{\ProposalTechnicalPOC}{\OrganizationDefaultPOC}
+\renewcommand{\ProposalTechnicalPOCEmail}{\OrganizationEmail}
+\renewcommand{\ProposalTechnicalPOCPhone}{\OrganizationPhone}
 \renewcommand{\ProposalTechnicalPOCAddress}{\address}
-\renewcommand{\ProposalContractsPOC}{Contracts Manager}
-\renewcommand{\ProposalContractsPOCEmail}{contracts@example.com}
-\renewcommand{\ProposalContractsPOCPhone}{800-555-0102}
+\renewcommand{\ProposalContractsPOC}{\OrganizationDefaultPOC}
+\renewcommand{\ProposalContractsPOCEmail}{\OrganizationEmail}
+\renewcommand{\ProposalContractsPOCPhone}{\OrganizationPhone}
 \renewcommand{\ProposalContractsPOCAddress}{\address}
-\renewcommand{\ProposalSecurityPOC}{Security Manager}
-\renewcommand{\ProposalSecurityPOCEmail}{security@example.com}
-\renewcommand{\ProposalSecurityPOCPhone}{800-555-0103}
+\renewcommand{\ProposalSecurityPOC}{\OrganizationDefaultPOC}
+\renewcommand{\ProposalSecurityPOCEmail}{\OrganizationEmail}
+\renewcommand{\ProposalSecurityPOCPhone}{\OrganizationPhone}
 \renewcommand{\ProposalSecurityPOCAddress}{\address}
 
 %% Additional, optional proposal details.
