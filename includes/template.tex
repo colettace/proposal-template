@@ -21,6 +21,7 @@
 \usepackage{xcolor}
 \usepackage{csquotes}
 \usepackage{enumitem}
+\usepackage{etoolbox}
 \setlist{nosep} % enumitem replacement for the compact lists formerly provided by mdwlist
 \usepackage{fancyhdr}
 \usepackage[includeheadfoot,left=1in,top=.4in,right=1in,bottom=.75in,headsep=\dimexpr3cm-59pt\relax,headheight=59pt]{geometry}
@@ -49,6 +50,87 @@
 \newcommand{\ProposalAuthor}{}
 \newcommand{\ProposalCompany}{}
 \newcommand{\ProposalSubject}{Proposal for \ProposalProjectName}
+
+% Solicitation metadata.  Values and labels are commands so a solicitation can
+% override any preset after calling it.  Empty values suppress their cover row.
+\newcommand{\ProposalSolicitationNumber}{}
+\newcommand{\ProposalAmendmentAcknowledgment}{}
+\newcommand{\ProposalOpportunityTitle}{}
+\newcommand{\ProposalAgency}{}
+\newcommand{\ProposalOffice}{}
+\newcommand{\ProposalProcurementType}{}
+\newcommand{\ProposalVolume}{}
+\newcommand{\ProposalVolumeNumber}{}
+\newcommand{\ProposalSubmissionDateTimeZone}{}
+\newcommand{\ProposalNAICSCode}{}
+\newcommand{\ProposalSizeStatus}{}
+\newcommand{\ProposalContractVehicleTaskOrder}{}
+\newcommand{\ProposalSetAsideType}{}
+\newcommand{\ProposalCAGECode}{}
+\newcommand{\ProposalUEI}{}
+\newcommand{\ProposalValidityPeriod}{}
+\newcommand{\ProposalBAATechnicalArea}{}
+\newcommand{\ProposalBAATopicNumber}{}
+
+\newcommand{\ProposalTechnicalPOC}{}
+\newcommand{\ProposalTechnicalPOCEmail}{}
+\newcommand{\ProposalTechnicalPOCPhone}{}
+\newcommand{\ProposalTechnicalPOCAddress}{}
+\newcommand{\ProposalContractsPOC}{}
+\newcommand{\ProposalContractsPOCEmail}{}
+\newcommand{\ProposalContractsPOCPhone}{}
+\newcommand{\ProposalContractsPOCAddress}{}
+\newcommand{\ProposalSecurityPOC}{}
+\newcommand{\ProposalSecurityPOCEmail}{}
+\newcommand{\ProposalSecurityPOCPhone}{}
+\newcommand{\ProposalSecurityPOCAddress}{}
+
+\newcommand{\ProposalLabelSolicitationNumber}{Solicitation Number}
+\newcommand{\ProposalLabelAmendmentAcknowledgment}{Amendment Acknowledgment}
+\newcommand{\ProposalLabelOpportunityTitle}{Opportunity Title}
+\newcommand{\ProposalLabelAgency}{Agency}
+\newcommand{\ProposalLabelOffice}{Office}
+\newcommand{\ProposalLabelProcurementType}{Procurement Type}
+\newcommand{\ProposalLabelVolume}{Proposal Volume}
+\newcommand{\ProposalLabelVolumeNumber}{Volume Number}
+\newcommand{\ProposalLabelSubmissionDateTimeZone}{Submission Date / Time Zone}
+\newcommand{\ProposalLabelNAICSCode}{NAICS Code}
+\newcommand{\ProposalLabelSizeStatus}{Size Status}
+\newcommand{\ProposalLabelContractVehicleTaskOrder}{Contract Vehicle / Task Order}
+\newcommand{\ProposalLabelSetAsideType}{Set-Aside Type}
+\newcommand{\ProposalLabelCAGECode}{CAGE Code}
+\newcommand{\ProposalLabelUEI}{UEI}
+\newcommand{\ProposalLabelValidityPeriod}{Proposal Validity Period}
+\newcommand{\ProposalLabelBAATechnicalArea}{BAA Technical Area}
+\newcommand{\ProposalLabelBAATopicNumber}{BAA Topic Number}
+\newcommand{\ProposalLabelTechnicalPOC}{Technical Point of Contact}
+\newcommand{\ProposalLabelContractsPOC}{Contracts Point of Contact}
+\newcommand{\ProposalLabelSecurityPOC}{Security Point of Contact}
+\newcommand{\ProposalLabelLeadOrganization}{Lead Organization}
+\newcommand{\ProposalLabelProposalTitle}{Proposal Title}
+
+% Apply a preset first, then use \renewcommand on any value or label above.
+\newcommand{\ProposalPresetRFP}{%
+  \renewcommand{\ProposalProcurementType}{Request for Proposals (RFP)}%
+  \renewcommand{\ProposalLabelSolicitationNumber}{RFP / Solicitation Number}%
+  \renewcommand{\ProposalLabelContractVehicleTaskOrder}{Contract Vehicle / Task Order}%
+}
+\newcommand{\ProposalPresetRFQTaskOrder}{%
+  \renewcommand{\ProposalProcurementType}{RFQ / Task Order}%
+  \renewcommand{\ProposalLabelSolicitationNumber}{RFQ Number}%
+  \renewcommand{\ProposalLabelContractVehicleTaskOrder}{Contract Vehicle / Task Order}%
+}
+\newcommand{\ProposalPresetBAA}{%
+  \renewcommand{\ProposalProcurementType}{Broad Agency Announcement (BAA)}%
+  \renewcommand{\ProposalLabelSolicitationNumber}{BAA Number}%
+  \renewcommand{\ProposalLabelBAATechnicalArea}{Technical Area}%
+  \renewcommand{\ProposalLabelBAATopicNumber}{Topic Number}%
+}
+\newcommand{\ProposalPresetWhitePaper}{%
+  \renewcommand{\ProposalProcurementType}{White Paper}%
+  \renewcommand{\ProposalLabelSolicitationNumber}{Call / Solicitation Number}%
+  \renewcommand{\ProposalLabelProposalTitle}{White Paper Title}%
+}
 
 % Keep the standard LaTeX metadata in sync for packages and commands which use
 % \@title and \@author (for example, PDF metadata and \maketitle).
@@ -97,7 +179,7 @@
 %%%
 
 \fancypagestyle{restricted}{
-    \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\baa}}
+    \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\ProposalSolicitationNumber}}
     \fancyhead[c]{ 
         \small
         \ifdefined\classification
@@ -107,7 +189,7 @@
         \textbf{\MakeUppercase{\restrictions} } \\
         \ProposalTitle: \biline
     }
-    \fancyhead[R]{\small \MakeUppercase{\baa}}
+    \fancyhead[R]{\small \MakeUppercase{\ProposalSolicitationNumber}}
 
     \fancyfoot[L]{\small \ProposalTitle}
     \fancyfoot[c]{\small \textbf{{\MakeUppercase{\restrictions}}}}
@@ -122,7 +204,7 @@
 }
 
 \fancypagestyle{plain}{
-    \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\baa}}
+    \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\ProposalSolicitationNumber}}
     \fancyhead[C]{ 
         \small
         \ifdefined\classification
@@ -131,7 +213,7 @@
         \textbf{ \ProposalCompany } \\
         \ProposalTitle: \biline
     }
-    \fancyhead[R]{\small \MakeUppercase{\baa}}
+    \fancyhead[R]{\small \MakeUppercase{\ProposalSolicitationNumber}}
 
     \fancyfoot[L]{\small \ProposalTitle}
     \fancyfoot[C]{
@@ -170,6 +252,14 @@
     \cleardoublepage
 }
 
+\newcommand{\ProposalCoverRow}[2]{\ifdefempty{#2}{}{\textbf{#1} & #2 \\ \hline}}
+\newcommand{\ProposalContactRow}[5]{\ifdefempty{#2}{}{%
+    \textbf{#1} & #2 \\
+    \ifdefempty{#3}{}{& #3 \\}%
+    \ifdefempty{#4}{}{& #4 \\}%
+    \ifdefempty{#5}{}{& #5 \\}%
+    \hline}}
+
 \newcommand{\proposalcover}{
     \thispagestyle{empty}
     \vspace*{-1.25in}
@@ -182,9 +272,24 @@
         \begin{center}
 	        \begin{tabular}{|l|p{3.5in}|}
 	            \hline
-	            \textbf{BAA Number} & \baa \\ \hline
-	            \textbf{Technical Area} & \techarea \\ \hline
-	            \textbf{Lead Organization} & \ProposalCompany \\ \hline
+	            \ProposalCoverRow{\ProposalLabelSolicitationNumber}{\ProposalSolicitationNumber}
+	            \ProposalCoverRow{\ProposalLabelAmendmentAcknowledgment}{\ProposalAmendmentAcknowledgment}
+	            \ProposalCoverRow{\ProposalLabelOpportunityTitle}{\ProposalOpportunityTitle}
+	            \ProposalCoverRow{\ProposalLabelAgency}{\ProposalAgency}
+	            \ProposalCoverRow{\ProposalLabelOffice}{\ProposalOffice}
+	            \ProposalCoverRow{\ProposalLabelProcurementType}{\ProposalProcurementType}
+	            \ProposalCoverRow{\ProposalLabelVolume}{\ProposalVolume}
+	            \ProposalCoverRow{\ProposalLabelVolumeNumber}{\ProposalVolumeNumber}
+	            \ProposalCoverRow{\ProposalLabelSubmissionDateTimeZone}{\ProposalSubmissionDateTimeZone}
+	            \ProposalCoverRow{\ProposalLabelNAICSCode}{\ProposalNAICSCode}
+	            \ProposalCoverRow{\ProposalLabelSizeStatus}{\ProposalSizeStatus}
+	            \ProposalCoverRow{\ProposalLabelContractVehicleTaskOrder}{\ProposalContractVehicleTaskOrder}
+	            \ProposalCoverRow{\ProposalLabelSetAsideType}{\ProposalSetAsideType}
+	            \ProposalCoverRow{\ProposalLabelCAGECode}{\ProposalCAGECode}
+	            \ProposalCoverRow{\ProposalLabelUEI}{\ProposalUEI}
+	            \ProposalCoverRow{\ProposalLabelBAATechnicalArea}{\ProposalBAATechnicalArea}
+	            \ProposalCoverRow{\ProposalLabelBAATopicNumber}{\ProposalBAATopicNumber}
+	            \ProposalCoverRow{\ProposalLabelLeadOrganization}{\ProposalCompany}
                 
                 \ifdefined\companytype
 	            \textbf{Type of Business} & \companytype \\ \hline
@@ -198,16 +303,13 @@
 	            \textbf{Team Members} & \team \\ \hline
                 \fi
 
-	            \textbf{Proposal Title} & \ProposalTitle: \biline \\ \hline
-	            \textbf{Technical Point of Contact} & \ProposalAuthor \\ & \email \\ & \phone \\ & \address \\ \hline
-	            \textbf{Administrative Point of Contact} & \ProposalAuthor \\ & \email \\ & \phone \\ & \address \\ \hline
+	            \textbf{\ProposalLabelProposalTitle} & \ProposalTitle: \biline \\ \hline
+	            \ProposalContactRow{\ProposalLabelTechnicalPOC}{\ProposalTechnicalPOC}{\ProposalTechnicalPOCEmail}{\ProposalTechnicalPOCPhone}{\ProposalTechnicalPOCAddress}
+	            \ProposalContactRow{\ProposalLabelContractsPOC}{\ProposalContractsPOC}{\ProposalContractsPOCEmail}{\ProposalContractsPOCPhone}{\ProposalContractsPOCAddress}
+	            \ProposalContactRow{\ProposalLabelSecurityPOC}{\ProposalSecurityPOC}{\ProposalSecurityPOCEmail}{\ProposalSecurityPOCPhone}{\ProposalSecurityPOCAddress}
 
                 \ifdefined\cost
 	            \textbf{Proposed Cost} & \cost \\ \hline
-                \fi
-
-                \ifdefined\submitdate
-	            \textbf{Date Submitted} & \submitdate \\ \hline
                 \fi
 
                 \ifdefined\awardtype
@@ -224,18 +326,11 @@
 
 	            \textbf{Date Prepared} & \today \\ \hline
 
-                \ifdefined\duns
-	            \textbf{DUNS Number} & \duns \\ \hline
-                \fi
-
                 \ifdefined\tin
 	            \textbf{TIN number} & \tin \\ \hline
                 \fi
                 
-                \ifdefined\cagecode
-	            \textbf{Cage Code} & \cagecode \\ \hline
-                \fi
-	            \textbf{Proposal Validity Period} & This proposal is valid for 120 days \\ \hline
+	            \ProposalCoverRow{\ProposalLabelValidityPeriod}{\ProposalValidityPeriod}
 	        \end{tabular}
         \end{center}
     }

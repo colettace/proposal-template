@@ -42,18 +42,50 @@
 \def\exportcontrollegend{Replace with the required export-control legend.}
 \def\proposalrestrictedlegend{Replace with the required proposal-restriction legend.}
 
-%% the following are only needed for proposals.  
-\def \baa{BAA-2013-001}
-\def \techarea{Technical Area 1 (Your mom's tech area)}
+%% Select a solicitation preset, then override any value or label needed by
+%% the actual solicitation. Other presets are \ProposalPresetRFQTaskOrder,
+%% \ProposalPresetBAA, and \ProposalPresetWhitePaper.
+\ProposalPresetRFP
+\renewcommand{\ProposalSolicitationNumber}{RFP-2026-001}
+\renewcommand{\ProposalAmendmentAcknowledgment}{Amendments 0001 and 0002}
+\renewcommand{\ProposalOpportunityTitle}{Example Research Opportunity}
+\renewcommand{\ProposalAgency}{Example Agency}
+\renewcommand{\ProposalOffice}{Acquisition Management Office}
+\renewcommand{\ProposalVolume}{Technical and Management Proposal}
+\renewcommand{\ProposalVolumeNumber}{Volume I}
+\renewcommand{\ProposalSubmissionDateTimeZone}{August 31, 2026, 2:00 p.m. ET}
+\renewcommand{\ProposalNAICSCode}{541715}
+\renewcommand{\ProposalSizeStatus}{Small Business}
+\renewcommand{\ProposalContractVehicleTaskOrder}{N/A}
+\renewcommand{\ProposalSetAsideType}{Total Small Business Set-Aside}
+\renewcommand{\ProposalCAGECode}{22222}
+\renewcommand{\ProposalUEI}{ABCDEF123456}
+\renewcommand{\ProposalValidityPeriod}{120 days after submission}
+
+% BAA-specific metadata is optional; leave empty for other solicitation types.
+% \renewcommand{\ProposalBAATechnicalArea}{Technical Area 1}
+% \renewcommand{\ProposalBAATopicNumber}{Topic 1.2}
+
+\renewcommand{\ProposalTechnicalPOC}{Technical Lead}
+\renewcommand{\ProposalTechnicalPOCEmail}{technical@example.com}
+\renewcommand{\ProposalTechnicalPOCPhone}{800-555-0101}
+\renewcommand{\ProposalTechnicalPOCAddress}{\address}
+\renewcommand{\ProposalContractsPOC}{Contracts Manager}
+\renewcommand{\ProposalContractsPOCEmail}{contracts@example.com}
+\renewcommand{\ProposalContractsPOCPhone}{800-555-0102}
+\renewcommand{\ProposalContractsPOCAddress}{\address}
+\renewcommand{\ProposalSecurityPOC}{Security Manager}
+\renewcommand{\ProposalSecurityPOCEmail}{security@example.com}
+\renewcommand{\ProposalSecurityPOCPhone}{800-555-0103}
+\renewcommand{\ProposalSecurityPOCAddress}{\address}
+
+%% Additional, optional proposal details.
 \def \doctitle{Volume I (Technical and Management Proposal)}
 \def \cost{\$1,000,000}
 
-\def \duns{111111111}
-\def \cagecode{222222}
 \def \tin{33-3333333}
 \def \awardtype{Cost Plus Fixed Fee (CPFF)}
 \def \pop{January 1, 2000 - December 31, 2020 (3 days)}
-\def \submitdate{January 1, 2020}
 
 \begin{document}
 
