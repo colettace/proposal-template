@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage[font={small,sf},labelfont={small,sf}]{caption}
 \usepackage{color}
+\usepackage{csquotes}
 \usepackage{fancyhdr}
 \usepackage[includeheadfoot,left=1in,top=.4in,right=1in,bottom=.75in,headsep=\dimexpr3cm-59pt\relax,headheight=59pt]{geometry}
 \usepackage{graphicx}
@@ -271,9 +272,9 @@
 % ease of use macros
 %%%
 
-% Example: \q{foo} 
-% Results: "foo" - except the quote marks go the right way.
-\newenvironment{q}[1]{``#1''} 
+% Example: \q{foo}
+% Results: Language-sensitive quotation marks around "foo".
+\newcommand{\q}[1]{\enquote{#1}}
 
 % example: C:$\bs$Program Files$\bs$Adobe$\bs$
 % Results: C:\Program Files\Adobe\
