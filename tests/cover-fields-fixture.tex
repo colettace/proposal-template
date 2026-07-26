@@ -5,9 +5,25 @@
 % fields in \proposalcover and their sample definitions in proposal.tex.
 \input{includes/template.tex}
 
-% Fields required by \proposalcover.
-\def\baa{Fixture BAA}
-\def\techarea{Fixture technical area}
+% Solicitation values, including the optional BAA-only values.
+\ProposalPresetBAA
+\renewcommand{\ProposalSolicitationNumber}{Fixture BAA}
+\renewcommand{\ProposalAmendmentAcknowledgment}{Amendment 0001}
+\renewcommand{\ProposalOpportunityTitle}{Fixture opportunity}
+\renewcommand{\ProposalAgency}{Fixture agency}
+\renewcommand{\ProposalOffice}{Fixture office}
+\renewcommand{\ProposalVolume}{Technical proposal}
+\renewcommand{\ProposalVolumeNumber}{I}
+\renewcommand{\ProposalSubmissionDateTimeZone}{July 26, 2026, UTC}
+\renewcommand{\ProposalNAICSCode}{541715}
+\renewcommand{\ProposalSizeStatus}{Small business}
+\renewcommand{\ProposalContractVehicleTaskOrder}{Fixture vehicle}
+\renewcommand{\ProposalSetAsideType}{Fixture set-aside}
+\renewcommand{\ProposalCAGECode}{ABCDE}
+\renewcommand{\ProposalUEI}{FIXTURE12345}
+\renewcommand{\ProposalValidityPeriod}{120 days}
+\renewcommand{\ProposalBAATechnicalArea}{Fixture technical area}
+\renewcommand{\ProposalBAATopicNumber}{Fixture topic}
 \renewcommand{\ProposalCompany}{Fixture Company}
 \renewcommand{\ProposalTitle}{Fixture Proposal}
 \def\biline{Cover-field regression fixture}
@@ -15,6 +31,12 @@
 \def\email{fixture@example.com}
 \def\phone{555-0100}
 \def\address{1 Fixture Way}
+\renewcommand{\ProposalTechnicalPOC}{Fixture Technical POC}
+\renewcommand{\ProposalTechnicalPOCEmail}{technical@example.com}
+\renewcommand{\ProposalContractsPOC}{Fixture Contracts POC}
+\renewcommand{\ProposalContractsPOCEmail}{contracts@example.com}
+\renewcommand{\ProposalSecurityPOC}{Fixture Security POC}
+\renewcommand{\ProposalSecurityPOCEmail}{security@example.com}
 \newif\ifproposalrestricted
 \proposalrestrictedfalse
 
@@ -23,13 +45,10 @@
 \def\companyref{REF-1234}
 \def\team{Fixture Team}
 \def\cost{\$123.45}
-\def\submitdate{July 26, 2026}
 \def\awardtype{Fixture award type}
 \def\placeofperformance{Fixture Place}
 \def\pop{One fixture year}
-\def\duns{123456789}
 \def\tin{12-3456789}
-\def\cagecode{ABCDE}
 
 \begin{document}
 \proposalcover
@@ -40,13 +59,31 @@
 \let\companyref\undefined
 \let\team\undefined
 \let\cost\undefined
-\let\submitdate\undefined
 \let\awardtype\undefined
 \let\placeofperformance\undefined
 \let\pop\undefined
-\let\duns\undefined
 \let\tin\undefined
-\let\cagecode\undefined
+\renewcommand{\ProposalSolicitationNumber}{}
+\renewcommand{\ProposalAmendmentAcknowledgment}{}
+\renewcommand{\ProposalOpportunityTitle}{}
+\renewcommand{\ProposalAgency}{}
+\renewcommand{\ProposalOffice}{}
+\renewcommand{\ProposalProcurementType}{}
+\renewcommand{\ProposalVolume}{}
+\renewcommand{\ProposalVolumeNumber}{}
+\renewcommand{\ProposalSubmissionDateTimeZone}{}
+\renewcommand{\ProposalNAICSCode}{}
+\renewcommand{\ProposalSizeStatus}{}
+\renewcommand{\ProposalContractVehicleTaskOrder}{}
+\renewcommand{\ProposalSetAsideType}{}
+\renewcommand{\ProposalCAGECode}{}
+\renewcommand{\ProposalUEI}{}
+\renewcommand{\ProposalValidityPeriod}{}
+\renewcommand{\ProposalBAATechnicalArea}{}
+\renewcommand{\ProposalBAATopicNumber}{}
+\renewcommand{\ProposalTechnicalPOC}{}
+\renewcommand{\ProposalContractsPOC}{}
+\renewcommand{\ProposalSecurityPOC}{}
 
 \proposalcover
 \end{document}

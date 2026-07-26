@@ -126,15 +126,36 @@ with `\Proposal` are declared by the template and must be configured with
 These values populate both the document and its PDF title, author, and subject
 metadata. Set them before `\begin{document}`.
 
-Other fields use the existing `\def` style. Required proposal-cover fields
-include `\baa`, `\techarea`, `\biline`, `\email`, `\phone`, and `\address`.
-The following cover rows are optional and disappear when their command is not
-defined:
+Choose a solicitation preset before setting solicitation-specific values:
+
+```tex
+\ProposalPresetRFP % or \ProposalPresetRFQTaskOrder, \ProposalPresetBAA,
+                   % or \ProposalPresetWhitePaper
+\renewcommand{\ProposalSolicitationNumber}{RFP-2026-001}
+```
+
+Presets supply appropriate procurement-type values and common labels. They do
+not lock the cover: every value and every `\ProposalLabel...` command may be
+overridden with `\renewcommand` after applying the preset.
+
+The configurable cover metadata includes solicitation number, amendment
+acknowledgment, opportunity title, agency, office, procurement type, proposal
+volume and number, submission date/time zone, NAICS, size status, contract
+vehicle/task order, set-aside, CAGE, UEI, and validity period. Empty values
+suppress their rows. `\ProposalBAATechnicalArea` and
+`\ProposalBAATopicNumber` are optional even under the BAA preset rather than
+being assumed for every submission. Configure distinct contacts with the
+`\ProposalTechnicalPOC...`, `\ProposalContractsPOC...`, and
+`\ProposalSecurityPOC...` command families; each supports a name, email,
+phone, and address.
+
+Additional legacy fields use the existing `\def` style. The following cover
+rows are optional and disappear when their command is not defined:
 
 - `\companytype`, `\companyref`, and `\team`
-- `\cost`, `\submitdate`, and `\awardtype`
+- `\cost` and `\awardtype`
 - `\placeofperformance` and `\pop`
-- `\duns`, `\tin`, and `\cagecode`
+- `\tin`
 
 Choose the pages appropriate to the deliverable near
 `\begin{document}`:
