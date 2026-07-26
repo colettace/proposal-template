@@ -41,12 +41,12 @@
 % Based off of suggestions at: http://jevopi.blogspot.com/2009/09/acronyms-and-latex.html
 \providecommand{\listofacronymsname}{List of Acronyms}
 \providecommand{\listofacronyms}{
-    \ifx\chapter\undefined
+    \ifcsname chapter\endcsname
         \chapter*{\listofacronymsname}
-	    % \addcontentsline{toc}{chapter}{\listofacronymsname}
+        \addcontentsline{toc}{chapter}{\listofacronymsname}
     \else
         \section*{\listofacronymsname}
-		% \addcontentsline{toc}{section}{\listofacronymsname}
+        \addcontentsline{toc}{section}{\listofacronymsname}
     \fi
     \label{sec:acronyms}
 	\markboth{\listofacronymsname}{\listofacronymsname}
@@ -212,7 +212,7 @@
     \cleardoublepage
     \pagestyle{plain}
     \phantomsection
-    \ifx\chapter\undefined
+    \ifcsname chapter\endcsname
         \addcontentsline{toc}{chapter}{References}
     \else
         \addcontentsline{toc}{section}{References}
