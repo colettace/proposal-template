@@ -69,10 +69,27 @@ Work from the top of `proposal.tex` downward:
 4. Keep only the required page commands: `\proposalcover`, `\whitepapercover`,
    and `\docinfo`. Commenting out a command removes that page group.
 5. Reorder and rename the outline to mirror the solicitation, delete
-   inapplicable sections, and replace every bracketed prompt with evidence-based
-   proposal content.
+   inapplicable sections, and replace the fictional sample narrative, names,
+   metrics, dates, links, table rows, and figure with evidence-based proposal
+   content. The populated examples are demonstrations, not reusable claims.
 6. Add acronyms and sources only when used. To print references, add citations
    and uncomment `\bib` near the end of `proposal.tex`.
+
+### Included LaTeX examples
+
+The sample response deliberately demonstrates headings, bold/italic/underlined
+and monospaced text, hyperlinks, internal cross-references, ordered and
+unordered lists, figures with captions, and width-aware tables. Tables use the
+common `booktabs` and `tabularx` packages: prefer whitespace and `booktabs`
+rules to vertical grid lines, and use `tabularx` when narrative columns need to
+wrap within `\textwidth`. Figures use standard `graphicx`, while links and PDF
+navigation use `hyperref` and `bookmark`.
+
+Most examples are placed where they naturally occur in a proposal (for
+example, staffing and risk tables). Appendix A is a compact formatting sampler
+that can be deleted before submission. Captions and labels make tables and
+figures appear in the generated lists and allow references to update when
+content moves.
 
 #### Contacts: share, change, or remove
 
