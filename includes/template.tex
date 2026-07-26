@@ -51,6 +51,64 @@
 \newcommand{\ProposalCompany}{}
 \newcommand{\ProposalSubject}{Proposal for \ProposalProjectName}
 
+% Marking profiles are deliberately independent and disabled by default.  No
+% profile contains reusable legal wording: the document owner must configure
+% every field from the authority governing the actual deliverable.
+\newif\ifProposalOfferorProprietary
+\newif\ifProposalSolicitationLegend
+\newif\ifProposalCUI
+\newif\ifProposalExportControlled
+\newif\ifProposalClassified
+\ProposalOfferorProprietaryfalse
+\ProposalSolicitationLegendfalse
+\ProposalCUIfalse
+\ProposalExportControlledfalse
+\ProposalClassifiedfalse
+
+\newcommand{\ProposalOfferorProprietaryAuthority}{}
+\newcommand{\ProposalOfferorProprietaryBanner}{}
+\newcommand{\ProposalOfferorProprietaryPortionMarking}{}
+\newcommand{\ProposalOfferorProprietaryDissemination}{}
+\newcommand{\ProposalOfferorProprietaryHandling}{}
+\newcommand{\ProposalSolicitationLegendAuthority}{}
+\newcommand{\ProposalSolicitationLegendBanner}{}
+\newcommand{\ProposalSolicitationLegendPortionMarking}{}
+\newcommand{\ProposalSolicitationLegendDissemination}{}
+\newcommand{\ProposalSolicitationLegendHandling}{}
+\newcommand{\ProposalCUIAuthority}{}
+\newcommand{\ProposalCUIBanner}{}
+\newcommand{\ProposalCUIPortionMarking}{}
+\newcommand{\ProposalCUIDissemination}{}
+\newcommand{\ProposalCUIHandling}{}
+\newcommand{\ProposalExportControlledAuthority}{}
+\newcommand{\ProposalExportControlledBanner}{}
+\newcommand{\ProposalExportControlledPortionMarking}{}
+\newcommand{\ProposalExportControlledDissemination}{}
+\newcommand{\ProposalExportControlledHandling}{}
+\newcommand{\ProposalClassifiedAuthority}{}
+\newcommand{\ProposalClassifiedBanner}{}
+\newcommand{\ProposalClassifiedPortionMarking}{}
+\newcommand{\ProposalClassifiedDissemination}{}
+\newcommand{\ProposalClassifiedHandling}{}
+
+\newcommand{\ProposalRequireProfileField}[3]{%
+  \ifdefempty{#3}{\PackageError{proposal-template}{Enabled #1 profile is missing #2}{Configure every field before enabling a marking profile.}}{}%
+}
+\newcommand{\ProposalValidateProfile}[6]{%
+  \ProposalRequireProfileField{#1}{authority}{#2}%
+  \ProposalRequireProfileField{#1}{exact banner text}{#3}%
+  \ProposalRequireProfileField{#1}{portion-marking behavior}{#4}%
+  \ProposalRequireProfileField{#1}{dissemination controls}{#5}%
+  \ProposalRequireProfileField{#1}{handling notes}{#6}%
+}
+\AtBeginDocument{%
+  \ifProposalOfferorProprietary\ProposalValidateProfile{offeror proprietary data}{\ProposalOfferorProprietaryAuthority}{\ProposalOfferorProprietaryBanner}{\ProposalOfferorProprietaryPortionMarking}{\ProposalOfferorProprietaryDissemination}{\ProposalOfferorProprietaryHandling}\fi
+  \ifProposalSolicitationLegend\ProposalValidateProfile{solicitation-prescribed proposal legend}{\ProposalSolicitationLegendAuthority}{\ProposalSolicitationLegendBanner}{\ProposalSolicitationLegendPortionMarking}{\ProposalSolicitationLegendDissemination}{\ProposalSolicitationLegendHandling}\fi
+  \ifProposalCUI\ProposalValidateProfile{CUI}{\ProposalCUIAuthority}{\ProposalCUIBanner}{\ProposalCUIPortionMarking}{\ProposalCUIDissemination}{\ProposalCUIHandling}\fi
+  \ifProposalExportControlled\ProposalValidateProfile{export-controlled information}{\ProposalExportControlledAuthority}{\ProposalExportControlledBanner}{\ProposalExportControlledPortionMarking}{\ProposalExportControlledDissemination}{\ProposalExportControlledHandling}\fi
+  \ifProposalClassified\ProposalValidateProfile{classified material}{\ProposalClassifiedAuthority}{\ProposalClassifiedBanner}{\ProposalClassifiedPortionMarking}{\ProposalClassifiedDissemination}{\ProposalClassifiedHandling}\fi
+}
+
 % Solicitation metadata.  Values and labels are commands so a solicitation can
 % override any preset after calling it.  Empty values suppress their cover row.
 \newcommand{\ProposalSolicitationNumber}{}
@@ -178,13 +236,19 @@
 % custom page styles
 %%%
 
+\newcommand{\ProposalActiveBanners}{%
+    \ifProposalOfferorProprietary\textbf{\ProposalOfferorProprietaryBanner}\quad\fi
+    \ifProposalSolicitationLegend\textbf{\ProposalSolicitationLegendBanner}\quad\fi
+    \ifProposalCUI\textbf{\ProposalCUIBanner}\quad\fi
+    \ifProposalExportControlled\textbf{\ProposalExportControlledBanner}\quad\fi
+    \ifProposalClassified\textbf{\ProposalClassifiedBanner}\fi
+}
+
 \fancypagestyle{restricted}{
     \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\ProposalSolicitationNumber}}
     \fancyhead[c]{ 
         \small
-        \ifdefined\classification
-        \textbf{\classification} \\ 
-        \fi
+        \ProposalActiveBanners \\
         \textbf{ \ProposalCompany } \\
         \textbf{\MakeUppercase{\restrictions} } \\
         \ProposalTitle: \biline
@@ -196,9 +260,7 @@
     \fancyfoot[c]{
         \small
         \textbf{\MakeUppercase{\restrictions} } \\
-        \ifdefined\classification
-        \textbf{\classification}
-        \fi
+        \ProposalActiveBanners
     }
     \fancyfoot[R]{\small \thepage}
 }
@@ -207,9 +269,7 @@
     \fancyhead[L]{\rule[-2ex]{0pt}{2ex}\small \MakeUppercase{\ProposalSolicitationNumber}}
     \fancyhead[C]{ 
         \small
-        \ifdefined\classification
-        \textbf{\classification} \\ 
-        \fi
+        \ProposalActiveBanners \\
         \textbf{ \ProposalCompany } \\
         \ProposalTitle: \biline
     }
@@ -218,9 +278,7 @@
     \fancyfoot[L]{\small \ProposalTitle}
     \fancyfoot[C]{
         \small
-        \ifdefined\classification
-        \textbf{\classification}
-        \fi
+        \ProposalActiveBanners
     }
     \fancyfoot[R]{\small \thepage}
 }
@@ -335,11 +393,24 @@
         \end{center}
     }
 
-    \ifproposalrestricted
-    \section*{Use and Disclosure of Data}
-    \proposalrestrictedlegend
-    \fi
     \cleardoublepage
+}
+
+\newcommand{\ProposalProfileDetails}[6]{%
+    \subsection*{#1}
+    \textbf{Authority:} #2\par
+    \textbf{Exact banner text:} #3\par
+    \textbf{Portion-marking behavior:} #4\par
+    \textbf{Dissemination controls:} #5\par
+    \textbf{Handling notes:} #6\par
+}
+
+\newcommand{\ProposalEnabledProfileDetails}{%
+  \ifProposalOfferorProprietary\ProposalProfileDetails{Offeror proprietary data}{\ProposalOfferorProprietaryAuthority}{\ProposalOfferorProprietaryBanner}{\ProposalOfferorProprietaryPortionMarking}{\ProposalOfferorProprietaryDissemination}{\ProposalOfferorProprietaryHandling}\fi
+  \ifProposalSolicitationLegend\ProposalProfileDetails{Solicitation-prescribed proposal legend}{\ProposalSolicitationLegendAuthority}{\ProposalSolicitationLegendBanner}{\ProposalSolicitationLegendPortionMarking}{\ProposalSolicitationLegendDissemination}{\ProposalSolicitationLegendHandling}\fi
+  \ifProposalCUI\ProposalProfileDetails{Controlled Unclassified Information (CUI)}{\ProposalCUIAuthority}{\ProposalCUIBanner}{\ProposalCUIPortionMarking}{\ProposalCUIDissemination}{\ProposalCUIHandling}\fi
+  \ifProposalExportControlled\ProposalProfileDetails{Export-controlled information}{\ProposalExportControlledAuthority}{\ProposalExportControlledBanner}{\ProposalExportControlledPortionMarking}{\ProposalExportControlledDissemination}{\ProposalExportControlledHandling}\fi
+  \ifProposalClassified\ProposalProfileDetails{Classified material}{\ProposalClassifiedAuthority}{\ProposalClassifiedBanner}{\ProposalClassifiedPortionMarking}{\ProposalClassifiedDissemination}{\ProposalClassifiedHandling}\fi
 }
 
 \newcommand{\bib}{
@@ -373,10 +444,8 @@
             
     \ProposalAuthor \\ \email \\ \phone
     
-    \ifexportcontrolled
-    \section*{Export Control}
-    \exportcontrollegend
-    \fi
+    \section*{Enabled Marking Profiles}
+    \ProposalEnabledProfileDetails
     
     \cleardoublepage
 

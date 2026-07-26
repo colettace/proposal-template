@@ -168,17 +168,51 @@ Choose the pages appropriate to the deliverable near
 Remove or comment out a command for a page you do not need. Customize acronyms
 in `includes/acronyms.tex`.
 
-### Document-control markings
+### Document-control marking profiles
 
-Both document controls are off by default. `\exportcontrolledtrue` displays
-`\exportcontrollegend` on the document-information page, while
-`\proposalrestrictedtrue` displays `\proposalrestrictedlegend` on the proposal
-cover. `\pagestyle{restricted}` applies the restricted header and footer to
-subsequent content pages.
+The template provides five independent profiles, all disabled by default:
 
-Never copy a sample marking into a real submission without verification. Use
-the exact text required by the solicitation, security classification guide,
-CUI guidance, or applicable data-rights clause.
+| Profile | Enable switch | Configuration prefix |
+| --- | --- | --- |
+| Offeror proprietary data | `\ProposalOfferorProprietarytrue` | `\ProposalOfferorProprietary...` |
+| Solicitation-prescribed proposal legend | `\ProposalSolicitationLegendtrue` | `\ProposalSolicitationLegend...` |
+| Controlled Unclassified Information (CUI) | `\ProposalCUItrue` | `\ProposalCUI...` |
+| Export-controlled information | `\ProposalExportControlledtrue` | `\ProposalExportControlled...` |
+| Classified material | `\ProposalClassifiedtrue` | `\ProposalClassified...` |
+
+Each prefix has `Authority`, `Banner`, `PortionMarking`, `Dissemination`, and
+`Handling` commands. Every one must be set to a nonempty, reviewed value before
+its switch is enabled; compilation deliberately fails otherwise. If portion
+marking or dissemination restrictions do not apply, record that reviewed
+determination explicitly rather than leaving the field empty. Enabled banners
+appear in page headers and footers, and the document-information page records
+the complete profile details.
+
+The repository supplies no authoritative legend, classification, CUI,
+export-control, or data-rights wording. Before enabling any profile, consult
+the actual solicitation and applicable contract clauses and confirm the text
+and treatment with the contracting officer. Consult the security officer for
+CUI or classified material and the export-control officer for controlled
+technical data. The responsible officials—not this template—must determine
+whether markings apply, which authority governs, the exact banner and portion
+marks, permitted dissemination, and handling requirements.
+
+For example, configuration follows this shape, using values obtained from
+those sources rather than copied universal text:
+
+```tex
+\renewcommand{\ProposalOfferorProprietaryAuthority}{<governing clause or solicitation section>}
+\renewcommand{\ProposalOfferorProprietaryBanner}{<exact approved banner text>}
+\renewcommand{\ProposalOfferorProprietaryPortionMarking}{<required behavior or reviewed not-applicable determination>}
+\renewcommand{\ProposalOfferorProprietaryDissemination}{<approved dissemination controls>}
+\renewcommand{\ProposalOfferorProprietaryHandling}{<approved handling notes>}
+\ProposalOfferorProprietarytrue
+```
+
+Do not treat profiles as interchangeable. In particular, changing a banner
+string cannot turn a proprietary proposal into a classified document;
+classified material requires its separately reviewed profile and authorized
+systems, facilities, personnel, and procedures.
 
 ## Citations and the BibTeX lifecycle
 
