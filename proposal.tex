@@ -3,7 +3,7 @@
 % Proposal metadata is namespaced to avoid replacing LaTeX commands.  Because
 % the template declares these with \newcommand, misspellings and duplicate
 % declarations are reported instead of silently changing unrelated commands.
-\renewcommand{\ProposalProjectName}{YOURMOM}
+\renewcommand{\ProposalProjectName}{Project Name}
 \renewcommand{\ProposalCompany}{Your Company Name}
 \def \companyref{N/A}
 \def \companytype{OTHER SMALL BUSINESS}
@@ -71,7 +71,7 @@
 
 \def \tin{33-3333333}
 \def \awardtype{Cost Plus Fixed Fee (CPFF)}
-\def \pop{January 1, 2000 - December 31, 2020 (3 days)}
+\def \pop{January 1, 2027--December 31, 2027 (12 months)}
 
 \begin{document}
 
@@ -83,22 +83,223 @@
 % banners. Enabling a profile makes its configured banner appear on pages.
 \pagestyle{plain}
 
-\section{Hi mom}
-I reference something here \cite{newsome2005dynamic}.
+% Treat the outline below as a compliance-oriented starting point, not a
+% substitute for the solicitation. Reorder and rename sections to mirror the
+% instructions and evaluation factors, delete inapplicable guidance, and
+% replace every bracketed prompt before submission.
 
-\subsection{SubSection Title}
-This is a subsection.  I should use an acronymn here \ac{MITM} once, and then again \ac{MITM}.
+\section{Executive Summary}
+\label{sec:executive-summary}
+[In one or two pages, identify the customer mission, the outcome being
+proposed, and why the solution presents the best value. State the offeror's
+principal discriminators and summarize the technical, management, staffing,
+schedule, and risk commitments that evaluators will find in later sections.
+Use measurable results rather than unsupported superlatives.]
 
-\subsubsection{Subsubsection title goes here}
-this is a sub sub section.
+\noindent
+\textbf{Recommended summary elements:}
+\begin{itemize}
+    \item the customer's need and the consequences of addressing it;
+    \item the proposed solution and the benefits delivered to users and stakeholders;
+    \item evidence that the solution is feasible, low risk, and aligned to the required schedule;
+    \item the team, relevant experience, and resources committed to performance; and
+    \item an explicit statement of compliance, assumptions, exceptions, and overall value.
+\end{itemize}
 
-\paragraph{Paragraph Title}
-This is a paragraph.
+\section{Understanding of the Requirement}
+\label{sec:understanding}
+[Demonstrate an operational understanding of the requirement rather than
+restating the solicitation. Explain the current environment, mission drivers,
+users, constraints, dependencies, desired end state, and measures of success.
+Tie each observation to a requirement or evaluation factor.]
 
-\subparagraph{Sub-Paragraph Title}
-This is a subparagraph.
+\subsection{Mission Context and Objectives}
+[Describe the mission, the stakeholders served, the problem to be solved, and
+the outcomes the customer must achieve. Identify applicable policies,
+standards, technical constraints, security considerations, and incumbent
+interfaces without assuming facts not provided by the customer.]
 
-\cite{frantzen2001stackghost} and \cite{cowan2001formatguard}.  Oh and \cite{ragsdale2000adaptation}.
+\subsection{Challenges, Dependencies, and Success Measures}
+[Identify the most important performance challenges and dependencies, explain
+their implications, and state how the approach addresses them. Define
+objective indicators of success---for example timeliness, availability,
+quality, adoption, cost, or customer-satisfaction targets---using the
+solicitation's terminology and thresholds.]
 
-\bib
+\subsection{Requirements Traceability and Compliance}
+[Provide a compliance matrix when permitted. Map every instruction,
+requirement, deliverable, and evaluation factor to the proposal section that
+answers it. Assign an owner and record page limits, required forms, and status
+in the working version of the matrix. Clearly identify any assumptions,
+dependencies, or requested exceptions.]
+
+\section{Technical Approach and Methodology}
+\label{sec:technical-approach}
+[Describe exactly how the team will perform the work. Organize this section in
+the same order as the statement of work, performance work statement, or
+evaluation factors. For each task, address inputs, activities, responsible
+roles, tools, outputs, acceptance criteria, timing, dependencies, and evidence
+that the method has worked in a comparable environment.]
+
+\subsection{Solution Overview}
+[Present the end-to-end solution, its major components, and the flow of work or
+information between them. Explain design choices and tradeoffs, distinguish
+proven components from proposed development, and show how the design supports
+scalability, interoperability, maintainability, accessibility, privacy, and
+security where applicable. Include a legible architecture or workflow figure
+when it improves evaluator understanding.]
+
+\subsection{Task Execution}
+[Create one subsection per solicitation task or objective. State the method,
+sequence, resources, customer inputs, deliverables, and completion criteria.
+Explain how work products will be reviewed, accepted, controlled, and
+transitioned. Cross-reference the schedule, staffing plan, quality controls,
+and risks rather than duplicating them.]
+
+\subsection{Implementation, Transition, and Schedule}
+[Provide a phased plan from notice to proceed through transition or closeout.
+Identify milestones, decision gates, deliverable dates, dependencies, critical
+path activities, and customer review periods. Explain startup, knowledge
+transfer, data or system migration, operational continuity, and exit
+activities. Ensure all dates and durations agree with the pricing volume and
+integrated master schedule.]
+
+\subsection{Deliverables and Performance Measurement}
+[List each deliverable and recurring service, its owner, due date or frequency,
+review process, and acceptance standard. Explain how performance data will be
+collected, validated, reported, and used for corrective action and continuous
+improvement. Map measures to contractual service levels or quality standards.]
+
+\section{Management Approach}
+\label{sec:management-approach}
+[Explain how the offeror will govern the work, maintain accountability, make
+timely decisions, and integrate employees, subcontractors, and customer
+participants. Identify decision rights and escalation paths, not merely job
+titles.]
+
+\subsection{Program Governance and Organization}
+[Provide an organization chart and describe authority, reporting relationships,
+work-package ownership, and interfaces with the contracting and technical
+representatives. Explain how scope, schedule, cost, performance, issues,
+decisions, and changes will be controlled.]
+
+\subsection{Communication and Reporting Plan}
+[Identify each stakeholder group, the information it needs, the responsible
+sender, communication channel, cadence, and record of decision. Address at
+least kickoff activities, routine status reporting, technical reviews,
+schedule and financial reporting, action-item tracking, urgent notification,
+and escalation. State proposed meeting frequencies only where they align with
+the solicitation or are clearly labeled as assumptions.]
+
+\subsection{Subcontractor and Partner Management}
+[Describe workshare, flow-down of contractual requirements, onboarding,
+performance monitoring, invoice and deliverable review, issue escalation, and
+accountability for every teammate. Explain how the prime contractor preserves
+a single point of responsibility to the customer. Delete this subsection if
+the proposal has no subcontractors or partners.]
+
+\subsection{Configuration and Change Management}
+[Explain how baselines, versions, approvals, and repositories will be
+controlled. Describe how the team will assess a proposed change's effect on
+scope, schedule, cost, staffing, security, and performance before obtaining
+the required authorization and communicating the decision.]
+
+\section{Staffing Plan}
+\label{sec:staffing}
+[Show that qualified personnel will be available when required and that labor
+categories, hours, resumes, organization charts, schedule, and price are
+internally consistent. Distinguish committed personnel from representative
+candidates in accordance with the solicitation.]
+
+\subsection{Roles, Qualifications, and Level of Effort}
+[For each role, state responsibilities, required competencies, minimum
+qualifications, location, clearance or suitability requirements, planned level
+of effort, and period of performance. Map named key personnel to the resume
+and commitment documentation required by the solicitation. Explain why the
+staffing mix is sufficient for peak and steady-state workloads.]
+
+\subsection{Recruiting, Retention, and Continuity}
+[Describe candidate sourcing, screening, customer approval, onboarding,
+retention, succession, cross-training, surge capacity, and replacement
+timelines. Address vacancies and unplanned absences without promising actions
+that conflict with labor law, personnel policies, or contract terms.]
+
+\subsection{Training and Knowledge Management}
+[Identify initial and recurring training, certification maintenance, knowledge
+capture, document repositories, communities of practice, and lessons-learned
+activities. Explain how the team will prevent loss of critical knowledge
+during transition and personnel changes.]
+
+\section{Quality Management}
+\label{sec:quality}
+[Describe a quality system tailored to the proposed work. Identify the quality
+manager's authority and independence, applicable standards, review points,
+acceptance criteria, records, and reporting. Explain how prevention and early
+detection reduce rework rather than relying only on final inspection.]
+
+\subsection{Quality Assurance and Quality Control}
+[Differentiate process-focused quality assurance from deliverable-focused
+quality control. For each major output, identify the preparer, independent
+reviewer where appropriate, checklist or standard, validation method, approval
+authority, and evidence retained. Include accessibility, security, editorial,
+and technical reviews when applicable.]
+
+\subsection{Nonconformance and Continuous Improvement}
+[Explain how defects and service-level misses will be logged, prioritized,
+contained, corrected, subjected to root-cause analysis, and verified before
+closure. Describe trend analysis, lessons learned, preventive actions, and how
+approved improvements enter controlled processes.]
+
+\section{Risk and Opportunity Management}
+\label{sec:risk}
+[Describe a repeatable process for identifying, analyzing, owning, monitoring,
+and retiring risks throughout performance. Define probability and consequence
+scales, exposure thresholds, review cadence, escalation criteria, and the link
+between the risk register and schedule or cost controls.]
+
+[Summarize the highest proposal-specific risks in a register that includes
+cause, risk event, consequence, probability, impact, owner, mitigation steps,
+trigger, contingency, due date, and residual exposure. Include technical,
+schedule, staffing, supply-chain, security, transition, and external-dependency
+risks as applicable. Also identify opportunities whose deliberate pursuit can
+improve mission results, schedule, quality, or cost.]
+
+\section{Security, Privacy, and Regulatory Compliance}
+\label{sec:security}
+[Explain how the solution will satisfy every applicable security, privacy,
+safety, records-management, accessibility, data-rights, and regulatory
+requirement identified in the solicitation. Address governance, personnel,
+facilities, systems, data handling, incident reporting, supply chain, and
+continuous monitoring as applicable. Cite the governing requirement and assign
+responsibility for each control; do not claim certifications or authorizations
+the organization does not hold.]
+
+\section{Relevant Experience and Past Performance}
+\label{sec:experience}
+[Select examples according to the solicitation's recency, relevance, and
+submission rules. For each example, identify the customer, scope, size,
+complexity, period, contract type, team role, outcomes, and a customer contact
+when requested. Quantify results, explain why the work is relevant to this
+requirement, disclose performance issues as required, and describe corrective
+actions and lessons applied to the proposed approach.]
+
+\section{Assumptions, Exceptions, and Customer Responsibilities}
+\label{sec:assumptions}
+[Consolidate assumptions made in developing the technical, schedule, staffing,
+and pricing approaches. Identify required customer-furnished information,
+equipment, facilities, access, approvals, and decision timelines. State every
+exception or deviation exactly where the solicitation requires; confirm that
+this section agrees with the contracts and pricing volumes. Do not hide a
+material qualification in narrative text.]
+
+\section{Conclusion}
+\label{sec:conclusion}
+[Close with a concise, customer-focused statement connecting the proposed
+approach, team, controls, and discriminators to the evaluation factors and
+desired mission outcomes. Reaffirm major commitments and readiness to begin
+without introducing new features, qualifications, or claims.]
+
+% If the proposal uses external sources, cite them in the text and uncomment
+% the following line. Add or replace records in includes/refs.bib first.
+% \bib
 \end{document}
